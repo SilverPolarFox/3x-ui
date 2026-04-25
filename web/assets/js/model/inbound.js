@@ -1908,10 +1908,11 @@ class Inbound extends XrayCommonClass {
     }
 
     getWireguardLink(address, port, remark, peerId) {
+        const DNS = this.settings.DNS || '1.1.1.1, 1.0.0.1';
         let txt = `[Interface]\n`
         txt += `PrivateKey = ${this.settings.peers[peerId].privateKey}\n`
         txt += `Address = ${this.settings.peers[peerId].allowedIPs[0]}\n`
-        txt += `DNS = 1.1.1.1, 1.0.0.1\n`
+        txt += `DNS = ${DNS}\n`
         if (this.settings.mtu) {
             txt += `MTU = ${this.settings.mtu}\n`
         }
@@ -2726,7 +2727,8 @@ Inbound.WireguardSettings = class extends XrayCommonClass {
         mtu = 1420,
         secretKey = Wireguard.generateKeypair().privateKey,
         peers = [new Inbound.WireguardSettings.Peer()],
-        noKernelTun = false
+        noKernelTun = false,
+        DNS = '1.1.1.1, 1.0.0.1'
     ) {
         super(protocol);
         this.mtu = mtu;
@@ -2734,10 +2736,15 @@ Inbound.WireguardSettings = class extends XrayCommonClass {
         this.pubKey = secretKey.length > 0 ? Wireguard.generateKeypair(secretKey).publicKey : '';
         this.peers = peers;
         this.noKernelTun = noKernelTun;
+        this.DNS = DNS || '1.1.1.1, 1.0.0.1';
+
+        this.peers.forEach(peer => {
+            peer.DNS = this.DNS;
+        });
     }
 
     addPeer() {
-        this.peers.push(new Inbound.WireguardSettings.Peer(null, null, '', ['10.0.0.' + (this.peers.length + 2)]));
+        this.peers.push(new Inbound.WireguardSettings.Peer(null, null, '', ['10.0.0.' + (this.peers.length + 2)], 0, this.DNS || '1.1.1.1, 1.0.0.1'));
     }
 
     delPeer(index) {
@@ -2751,21 +2758,29 @@ Inbound.WireguardSettings = class extends XrayCommonClass {
             json.secretKey,
             json.peers.map(peer => Inbound.WireguardSettings.Peer.fromJson(peer)),
             json.noKernelTun,
+            json.DNS,
         );
     }
 
     toJson() {
+        const DNS = this.DNS || '1.1.1.1, 1.0.0.1';
+
+        this.peers.forEach(peer => {
+            peer.DNS = DNS;
+        });
+
         return {
             mtu: this.mtu ?? undefined,
             secretKey: this.secretKey,
             peers: Inbound.WireguardSettings.Peer.toJsonArray(this.peers),
             noKernelTun: this.noKernelTun,
+            DNS: this.DNS,
         };
     }
 };
 
 Inbound.WireguardSettings.Peer = class extends XrayCommonClass {
-    constructor(privateKey, publicKey, psk = '', allowedIPs = ['10.0.0.2/32'], keepAlive = 0) {
+    constructor(privateKey, publicKey, psk = '', allowedIPs = ['10.0.0.2/32'], keepAlive = 0, DNS = '1.1.1.1, 1.0.0.1') {
         super();
         this.privateKey = privateKey
         this.publicKey = publicKey;
@@ -2778,6 +2793,7 @@ Inbound.WireguardSettings.Peer = class extends XrayCommonClass {
         })
         this.allowedIPs = allowedIPs;
         this.keepAlive = keepAlive;
+        this.DNS = DNS || '1.1.1.1, 1.0.0.1';
     }
 
     static fromJson(json = {}) {
@@ -2786,7 +2802,8 @@ Inbound.WireguardSettings.Peer = class extends XrayCommonClass {
             json.publicKey,
             json.preSharedKey,
             json.allowedIPs,
-            json.keepAlive
+            json.keepAlive,
+            json.DNS
         );
     }
 
@@ -2800,6 +2817,7 @@ Inbound.WireguardSettings.Peer = class extends XrayCommonClass {
             preSharedKey: this.psk.length > 0 ? this.psk : undefined,
             allowedIPs: this.allowedIPs,
             keepAlive: this.keepAlive ?? undefined,
+            DNS: this.DNS
         };
     }
 };
