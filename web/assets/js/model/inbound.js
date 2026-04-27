@@ -2179,10 +2179,7 @@ class Inbound extends XrayCommonClass {
     }
 
     getWireguardTxt(address, port, remark, peerId) {
-<<<<<<< HEAD
         const DNS = this.settings.DNS || '1.1.1.1, 1.0.0.1';
-=======
->>>>>>> 0b5c239f98fd112df10ed4846377563a391ebf60
         let txt = `[Interface]\n`
         txt += `PrivateKey = ${this.settings.peers[peerId].privateKey}\n`
         txt += `Address = ${this.settings.peers[peerId].allowedIPs[0]}\n`
