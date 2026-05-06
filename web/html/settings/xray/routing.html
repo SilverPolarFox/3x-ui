@@ -44,8 +44,11 @@
                     :trigger="['hover', 'click']">
                     <span class="criterion-row">
                         <span class="criterion-label">IP</span>
-                        <span class="criterion-values">
-                            <span v-for="(val, i) in csv(rule.sourceIP).slice(0, 2)" :key="i" class="criterion-value">[[ val ]]</span>
+                        <span style="display:flex;flex-direction:column;gap:0;min-width:0;">
+                            <span v-for="(val, i) in csv(rule.sourceIP).slice(0, 3)" :key="i"
+                                style="display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                                [[ val ]][[ (i < 2 && i < csv(rule.sourceIP).length - 1) || (i === 2 && csv(rule.sourceIP).length > 3) ? ',' : '' ]]
+                            </span>
                         </span>
                         <span v-if="csv(rule.sourceIP).length > 3" class="criterion-more">+[[ csv(rule.sourceIP).length - 3 ]]</span>
                     </span>
@@ -57,8 +60,11 @@
                     :trigger="['hover', 'click']">
                     <span class="criterion-row">
                         <span class="criterion-label">Port</span>
-                        <span class="criterion-values">
-                            <span v-for="(val, i) in csv(rule.sourcePort).slice(0, 2)" :key="i" class="criterion-value">[[ val ]]</span>
+                        <span style="display:flex;flex-direction:column;gap:0;min-width:0;">
+                            <span v-for="(val, i) in csv(rule.sourcePort).slice(0, 3)" :key="i"
+                                style="display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                                [[ val ]][[ (i < 2 && i < csv(rule.sourcePort).length - 1) || (i === 2 && csv(rule.sourcePort).length > 3) ? ',' : '' ]]
+                            </span>
                         </span>
                         <span v-if="csv(rule.sourcePort).length > 3" class="criterion-more">+[[ csv(rule.sourcePort).length - 3 ]]</span>
                     </span>
@@ -70,8 +76,11 @@
                     :trigger="['hover', 'click']">
                     <span class="criterion-row">
                         <span class="criterion-label">VLESS</span>
-                        <span class="criterion-values">
-                            <span v-for="(val, i) in csv(rule.vlessRoute).slice(0, 2)" :key="i" class="criterion-value">[[ val ]]</span>
+                        <span style="display:flex;flex-direction:column;gap:0;min-width:0;">
+                            <span v-for="(val, i) in csv(rule.vlessRoute).slice(0, 3)" :key="i"
+                                style="display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                                [[ val ]][[ (i < 2 && i < csv(rule.vlessRoute).length - 1) || (i === 2 && csv(rule.vlessRoute).length > 3) ? ',' : '' ]]
+                            </span>
                         </span>
                         <span v-if="csv(rule.vlessRoute).length > 3" class="criterion-more">+[[ csv(rule.vlessRoute).length - 3 ]]</span>
                     </span>
@@ -90,8 +99,11 @@
                     :trigger="['hover', 'click']">
                     <span class="criterion-row">
                         <span class="criterion-label">L4</span>
-                        <span class="criterion-values">
-                            <span v-for="(val, i) in csv(rule.network).slice(0, 2)" :key="i" class="criterion-value">[[ val ]]</span>
+                        <span style="display:flex;flex-direction:column;gap:0;min-width:0;">
+                            <span v-for="(val, i) in csv(rule.network).slice(0, 3)" :key="i"
+                                style="display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                                [[ val ]][[ (i < 2 && i < csv(rule.network).length - 1) || (i === 2 && csv(rule.network).length > 3) ? ',' : '' ]]
+                            </span>
                         </span>
                         <span v-if="csv(rule.network).length > 3" class="criterion-more">+[[ csv(rule.network).length - 3 ]]</span>
                     </span>
@@ -103,8 +115,11 @@
                     :trigger="['hover', 'click']">
                     <span class="criterion-row">
                         <span class="criterion-label">Protocol</span>
-                        <span class="criterion-values">
-                            <span v-for="(val, i) in csv(rule.protocol).slice(0, 2)" :key="i" class="criterion-value">[[ val ]]</span>
+                        <span style="display:flex;flex-direction:column;gap:0;min-width:0;">
+                            <span v-for="(val, i) in csv(rule.protocol).slice(0, 3)" :key="i"
+                                style="display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                                [[ val ]][[ (i < 2 && i < csv(rule.protocol).length - 1) || (i === 2 && csv(rule.protocol).length > 3) ? ',' : '' ]]
+                            </span>
                         </span>
                         <span v-if="csv(rule.protocol).length > 3" class="criterion-more">+[[ csv(rule.protocol).length - 3 ]]</span>
                     </span>
@@ -116,8 +131,11 @@
                     :trigger="['hover', 'click']">
                     <span class="criterion-row">
                         <span class="criterion-label">Attrs</span>
-                        <span class="criterion-values">
-                            <span v-for="(val, i) in csv(rule.attrs).slice(0, 2)" :key="i" class="criterion-value">[[ val ]]</span>
+                        <span style="display:flex;flex-direction:column;gap:0;min-width:0;">
+                            <span v-for="(val, i) in csv(rule.attrs).slice(0, 3)" :key="i"
+                                style="display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                                [[ val ]][[ (i < 2 && i < csv(rule.attrs).length - 1) || (i === 2 && csv(rule.attrs).length > 3) ? ',' : '' ]]
+                            </span>
                         </span>
                         <span v-if="csv(rule.attrs).length > 3" class="criterion-more">+[[ csv(rule.attrs).length - 3 ]]</span>
                     </span>
@@ -136,8 +154,11 @@
                     :trigger="['hover', 'click']">
                     <span class="criterion-row">
                         <span class="criterion-label">IP</span>
-                        <span class="criterion-values">
-                            <span v-for="(val, i) in csv(rule.ip).slice(0, 2)" :key="i" class="criterion-value">[[ val ]]</span>
+                        <span style="display:flex;flex-direction:column;gap:0;min-width:0;">
+                            <span v-for="(val, i) in csv(rule.ip).slice(0, 3)" :key="i"
+                                style="display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                                [[ val ]][[ (i < 2 && i < csv(rule.ip).length - 1) || (i === 2 && csv(rule.ip).length > 3) ? ',' : '' ]]
+                            </span>
                         </span>
                         <span v-if="csv(rule.ip).length > 3" class="criterion-more">+[[ csv(rule.ip).length - 3 ]]</span>
                     </span>
@@ -149,8 +170,11 @@
                     :trigger="['hover', 'click']">
                     <span class="criterion-row">
                         <span class="criterion-label">Domain</span>
-                        <span class="criterion-values">
-                            <span v-for="(val, i) in csv(rule.domain).slice(0, 2)" :key="i" class="criterion-value">[[ val ]]</span>
+                        <span style="display:flex;flex-direction:column;gap:0;min-width:0;">
+                            <span v-for="(val, i) in csv(rule.domain).slice(0, 3)" :key="i"
+                                style="display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                                [[ val ]][[ (i < 2 && i < csv(rule.domain).length - 1) || (i === 2 && csv(rule.domain).length > 3) ? ',' : '' ]]
+                            </span>
                         </span>
                         <span v-if="csv(rule.domain).length > 3" class="criterion-more">+[[ csv(rule.domain).length - 3 ]]</span>
                     </span>
@@ -162,8 +186,11 @@
                     :trigger="['hover', 'click']">
                     <span class="criterion-row">
                         <span class="criterion-label">Port</span>
-                        <span class="criterion-values">
-                            <span v-for="(val, i) in csv(rule.port).slice(0, 2)" :key="i" class="criterion-value">[[ val ]]</span>
+                        <span style="display:flex;flex-direction:column;gap:0;min-width:0;">
+                            <span v-for="(val, i) in csv(rule.port).slice(0, 3)" :key="i"
+                                style="display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                                [[ val ]][[ (i < 2 && i < csv(rule.port).length - 1) || (i === 2 && csv(rule.port).length > 3) ? ',' : '' ]]
+                            </span>
                         </span>
                         <span v-if="csv(rule.port).length > 3" class="criterion-more">+[[ csv(rule.port).length - 3 ]]</span>
                     </span>
@@ -182,8 +209,11 @@
                     :trigger="['hover', 'click']">
                     <span class="criterion-row">
                         <span class="criterion-label">Tag</span>
-                        <span class="criterion-values">
-                            <span v-for="(val, i) in csv(rule.inboundTag).slice(0, 2)" :key="i" class="criterion-value">[[ val ]]</span>
+                        <span style="display:flex;flex-direction:column;gap:0;min-width:0;">
+                            <span v-for="(val, i) in csv(rule.inboundTag).slice(0, 3)" :key="i"
+                                style="display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                                [[ val ]][[ (i < 2 && i < csv(rule.inboundTag).length - 1) || (i === 2 && csv(rule.inboundTag).length > 3) ? ',' : '' ]]
+                            </span>
                         </span>
                         <span v-if="csv(rule.inboundTag).length > 3" class="criterion-more">+[[ csv(rule.inboundTag).length - 3 ]]</span>
                     </span>
@@ -195,8 +225,11 @@
                     :trigger="['hover', 'click']">
                     <span class="criterion-row">
                         <span class="criterion-label">User</span>
-                        <span class="criterion-values">
-                            <span v-for="(val, i) in csv(rule.user).slice(0, 2)" :key="i" class="criterion-value">[[ val ]]</span>
+                        <span style="display:flex;flex-direction:column;gap:0;min-width:0;">
+                            <span v-for="(val, i) in csv(rule.user).slice(0, 3)" :key="i"
+                                style="display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                                [[ val ]][[ (i < 2 && i < csv(rule.user).length - 1) || (i === 2 && csv(rule.user).length > 3) ? ',' : '' ]]
+                            </span>
                         </span>
                         <span v-if="csv(rule.user).length > 3" class="criterion-more">+[[ csv(rule.user).length - 3 ]]</span>
                     </span>
